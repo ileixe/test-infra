@@ -21,7 +21,6 @@ import (
 	"errors"
 	"fmt"
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 
@@ -734,34 +733,6 @@ func makePipelineRun(pj prowjobv1.ProwJob) (*pipelinev1beta1.PipelineRun, error)
 				StringVal: val,
 			},
 		})
-	}
-
-	// Inject resources from prow job.
-	for _, res := range p.Spec.Resources {
-		refName := res.ResourceRef.Name
-		var refs prowjobv1.Refs
-		var suffix string
-		if refName == config.ProwImplicitGitResource {
-			if pj.Spec.Refs == nil {
-				return nil, fmt.Errorf("%q requested on a ProwJob without an implicit git ref", config.ProwImplicitGitResource)
-			}
-			refs = *pj.Spec.Refs
-			suffix = "-implicit-ref"
-		} else if match := config.ReProwExtraRef.FindStringSubmatch(refName); len(match) == 2 {
-			index, _ := strconv.Atoi(match[1]) // We can't error because the regexp only matches digits.
-			refs = pj.Spec.ExtraRefs[index]    // ValidatePipelineRunSpec made sure this is safe.
-			suffix = fmt.Sprintf("-extra-ref-%d", index)
-		} else {
-			continue
-		}
-		// Change resource ref to resource spec
-		name := pj.Name + suffix
-		task := makePipelineGitTask(name, refs, pj)
-		if p.Spec.PipelineSpec == nil {
-			p.Spec.PipelineSpec = &pipelinev1beta1.PipelineSpec{Tasks: []pipelinev1beta1.PipelineTask{task}}
-		} else {
-			p.Spec.PipelineSpec.Tasks = append(p.Spec.PipelineSpec.Tasks, task)
-		}
 	}
 
 	return &p, nil

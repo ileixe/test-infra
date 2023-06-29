@@ -42,7 +42,7 @@ require (
 	github.com/djherbis/atime v1.0.0
 	github.com/evanphx/json-patch v4.12.0+incompatible
 	github.com/felixge/fgprof v0.9.1
-	github.com/fsnotify/fsnotify v1.5.1
+	github.com/fsnotify/fsnotify v1.6.0
 	github.com/fsouza/fake-gcs-server v1.19.4
 	github.com/go-bindata/go-bindata/v3 v3.1.3
 	github.com/go-git/go-git/v5 v5.6.1
@@ -68,7 +68,7 @@ require (
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.4.1
 	github.com/pelletier/go-toml v1.9.3
 	github.com/peterbourgon/diskv v2.0.1+incompatible
-	github.com/prometheus/client_golang v1.13.0
+	github.com/prometheus/client_golang v1.14.0
 	github.com/prometheus/client_model v0.3.0
 	github.com/prometheus/common v0.37.0
 	github.com/shurcooL/githubv4 v0.0.0-20210725200734-83ba7b4c9228
@@ -76,7 +76,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.2
-	github.com/tektoncd/pipeline v0.47.0
+	github.com/tektoncd/pipeline v0.46.0
 	go.uber.org/zap v1.24.0
 	go4.org v0.0.0-20201209231011-d4a079459e60
 	gocloud.dev v0.19.0
@@ -100,10 +100,10 @@ require (
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/api v0.25.9
 	k8s.io/apimachinery v0.26.4
-	k8s.io/client-go v0.25.9
+	k8s.io/client-go v0.25.7
 	k8s.io/code-generator v0.25.9
 	k8s.io/klog/v2 v2.90.1
-	k8s.io/kubernetes v1.15.0-alpha.0
+	k8s.io/kubernetes v1.27.3
 	k8s.io/utils v0.0.0-20230209194617-a36077c30491
 	knative.dev/pkg v0.0.0-20230221145627-8efb3485adcf
 	sigs.k8s.io/controller-runtime v0.12.3
@@ -213,10 +213,9 @@ require (
 	k8s.io/apiextensions-apiserver v0.25.4 // indirect
 	k8s.io/component-base v0.25.4 // indirect
 	k8s.io/gengo v0.0.0-20221011193443-fad74ee6edd9 // indirect
-	k8s.io/klog v1.0.0 // indirect
-	k8s.io/kube-openapi v0.0.0-20230308215209-15aac26d736a // indirect
+	k8s.io/kube-openapi v0.0.0-20230501164219-8b0f38b5fd1f // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 )
 
-go 1.18
+go 1.19

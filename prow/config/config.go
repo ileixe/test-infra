@@ -2863,22 +2863,6 @@ func ValidatePipelineRunSpec(jobType prowapi.ProwJobType, extraRefs []prowapi.Re
 	// be used or removed. (Specifying an unused extra ref must always be
 	// unintentional so we want to warn the user.)
 	extraIndexes := sets.NewInt()
-	for _, resource := range spec.Resources {
-		// Validate that periodic jobs don't request an implicit git ref.
-		if jobType == prowapi.PeriodicJob && resource.ResourceRef.Name == ProwImplicitGitResource {
-			return fmt.Errorf("periodic jobs do not have an implicit git ref to replace %s", ProwImplicitGitResource)
-		}
-
-		match := ReProwExtraRef.FindStringSubmatch(resource.ResourceRef.Name)
-		if len(match) != 2 {
-			continue
-		}
-		if len(match[1]) > 1 && match[1][0] == '0' {
-			return fmt.Errorf("resource %q: leading zeros are not allowed in PROW_EXTRA_GIT_REF_* indexes", resource.Name)
-		}
-		i, _ := strconv.Atoi(match[1]) // This can't error based on the regexp.
-		extraIndexes.Insert(i)
-	}
 	for i := range extraRefs {
 		if !extraIndexes.Has(i) {
 			return fmt.Errorf("extra_refs[%d] is not used; some resource must reference PROW_EXTRA_GIT_REF_%d", i, i)
